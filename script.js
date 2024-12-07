@@ -13,7 +13,7 @@ let filter = document.getElementById('filterTask')
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    const taskTitle = title.value.trim();
+    const taskTitle = title.value.trim(); //remove 
     const taskDescription = description.value.trim();
     const taskDate = date.value;
     const taskPriority = priority.value;
