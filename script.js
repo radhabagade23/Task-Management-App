@@ -42,6 +42,7 @@ btn.addEventListener('click', (e) => {
     priorityColumn.textContent = taskPriority || 'This is Pending';
 
     const actionsColumn = document.createElement('td');
+    actionsColumn.id = 'tableData';
 
     
     // Added Edit Button
@@ -73,11 +74,23 @@ btn.addEventListener('click', (e) => {
             alert('Something is missing. Task cannot be marked as completed.');
         } else {
             newRow.parentNode.removeChild(newRow); // Remove row from its current table
+            newRow.setAttribute('data-status', 'completed');
             completedTask.appendChild(newRow); // Move row to Completed Task Table
             actionsColumn.textContent = ''; // Clear action buttons
             newRow.style.backgroundColor = 'rgb(10, 173, 10)'; 
         }
     });
+
+    // Add row to the appropriate table
+    if (isTaskComplete) {
+        newRow.setAttribute('data-status', 'pending');
+        tableBody.appendChild(newRow); // Add to main task table
+    } else {
+        newRow.setAttribute('data-status', 'pending');
+        pendingTask.appendChild(newRow); // Add to Pending Task Table
+        newRow.style.backgroundColor = 'rgb(236, 55, 55)'; 
+    }
+
 
     // Append buttons to the actions column
     actionsColumn.appendChild(editBtn);
@@ -91,15 +104,9 @@ btn.addEventListener('click', (e) => {
     newRow.appendChild(priorityColumn);
     newRow.appendChild(actionsColumn);
 
-    // Add row to the appropriate table
-    if (isTaskComplete) {
-        tableBody.appendChild(newRow); // Add to main task table
-    } else {
-        pendingTask.appendChild(newRow); // Add to Pending Task Table
-        newRow.style.backgroundColor = 'rgb(236, 55, 55)'; 
-    }
 
     // filter task
+        // filter task
     filterBtn.addEventListener('click', () => {
         const priorityFilter = document.getElementById('filterPriority').value;
         const dateFilter = document.getElementById('filterDate').value;
@@ -116,7 +123,7 @@ btn.addEventListener('click', (e) => {
             let matchesFilter = true;
     
             // Get task details
-            const taskPriority = task.querySelector('td:nth-child(4)')?.textContent.trim();
+            const taskPriority = task.querySelector('td:nth-child(4)')?.textContent.trim().toLowerCase();
             const taskDate = task.querySelector('td:nth-child(3)')?.textContent.trim();
             const taskStatus = task.parentNode.id;
     
@@ -153,11 +160,11 @@ btn.addEventListener('click', (e) => {
         // If no tasks match the filter, display a message
         if (filterTaskTable.innerHTML === '') {
             const noTasksRow = document.createElement('tr');
-            const noTasksColumn = document.createElement('td');
-            noTasksColumn.colSpan = 5;
-            noTasksColumn.textContent = 'No tasks match the selected filters.';
-            noTasksColumn.style.textAlign = 'center';
-            noTasksRow.appendChild(noTasksColumn);
+            const noTasksCell = document.createElement('td');
+            noTasksCell.colSpan = 4;
+            noTasksCell.textContent = 'No tasks match the selected filters.';
+            noTasksCell.style.textAlign = 'center';
+            noTasksRow.appendChild(noTasksCell);
             filterTaskTable.appendChild(noTasksRow);
         }
     });

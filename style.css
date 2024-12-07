@@ -162,11 +162,15 @@ p{
     td{
         font-size: 17px;
     }
+    #tableData{
+        padding: 0px;
+    }
 }
 @media all and (max-width: 900px){
     table{
         width: 800px;
     }
+    
 }
 @media all and (max-width: 800px){
     .main-container, table{
