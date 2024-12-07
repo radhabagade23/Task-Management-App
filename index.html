@@ -18,6 +18,7 @@
             <input type="date" name="date" id="date" required>
             <label for="priority">Priority:</label><br>
             <select name="priority" id="priority" required>
+                <option value="" disabled selected>Select Priority</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
@@ -49,27 +50,54 @@
         </thead>
         <tbody id="completedTask"></tbody>
     </table>
+    <h2 class="pending-task">Pending Task Table</h2>
     <table class="table">
+        <thead>
+            <tr>
+                <th>Task Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         <tbody id="pendingTask"></tbody>
     </table>
     <p class="filter-task">Filter Task</p>
     <div class="filterDiv">
-        <label id="label">Priority: </label>
+        <label for="filter-priority" id="label">Priority: </label>
         <select name="priority" id="filterPriority">
+            <option value="" disabled selected>Select Priority</option>
             <option value="all">All</option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
         </select>
-        <label id="label">Due Date: </label>
-        <input type="date" name="date" id="filterDate">
-        <label id="label">Status: </label>
-        <select name="status" id="status">
+        <label for="filter-date" id="label">Due Date: </label>
+        <select name="dueDate" id="filterDate">
+            <option value="all">All</option>
+            <option value="7days">Next 7 Days</option>
+        </select>
+        <label for="filter-status" id="label">Status: </label>
+        <select name="status" id="filterStatus">
+            <option value="" disabled selected>Select Status</option>
             <option value="pending">Pending</option>
             <option value="completed">Completed</option>
         </select>
         <button id="filter">Apply Filter</button>
     </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Task Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="filterTask"></tbody>
+    </table>
     
     <script src="script.js"></script>
 </body>
